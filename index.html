@@ -7,424 +7,335 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
-<style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
 
+<style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-    scroll-behavior:smooth;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
 }
 
 :root{
-    --red:#ff003c;
-    --blue:#0066ff;
-    --dark:#050816;
-    --card:rgba(255,255,255,0.05);
-    --white:#ffffff;
+--red:#ff003c;
+--blue:#0066ff;
+--dark:#050816;
+--glass:rgba(255,255,255,0.05);
 }
 
 body{
-    background:
-    radial-gradient(circle at top,#0015ff,#050816 50%);
-    color:white;
-    overflow-x:hidden;
+background:#050816;
+color:white;
+overflow-x:hidden;
 }
 
-/* HERO */
+#particles-js{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+}
 
 .hero{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    position:relative;
-}
-
-.hero::before{
-    content:'';
-    position:absolute;
-    width:500px;
-    height:500px;
-    background:var(--red);
-    filter:blur(200px);
-    opacity:.3;
-    left:-100px;
-}
-
-.hero::after{
-    content:'';
-    position:absolute;
-    width:500px;
-    height:500px;
-    background:var(--blue);
-    filter:blur(200px);
-    opacity:.3;
-    right:-100px;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
 }
 
 .hero h1{
-    font-size:7rem;
-    font-weight:900;
-    z-index:2;
-    text-shadow:0 0 40px rgba(255,255,255,.4);
+font-size:6rem;
+font-weight:900;
+background:linear-gradient(90deg,#ff003c,#0066ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 .hero p{
-    font-size:1.5rem;
-    max-width:900px;
-    margin-top:20px;
-    z-index:2;
+font-size:1.4rem;
+max-width:900px;
+margin-top:20px;
 }
-
-.hero button{
-    margin-top:40px;
-    padding:15px 40px;
-    border:none;
-    border-radius:50px;
-    background:linear-gradient(90deg,var(--red),var(--blue));
-    color:white;
-    font-size:18px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.hero button:hover{
-    transform:scale(1.08);
-}
-
-/* NAV */
 
 nav{
-    position:sticky;
-    top:0;
-    z-index:999;
-    background:rgba(0,0,0,.85);
-    backdrop-filter:blur(20px);
+position:sticky;
+top:0;
+background:rgba(0,0,0,.8);
+backdrop-filter:blur(20px);
+z-index:1000;
 }
 
 nav ul{
-    list-style:none;
-    display:flex;
-    justify-content:center;
+display:flex;
+justify-content:center;
+list-style:none;
 }
 
 nav li{
-    margin:25px;
+margin:20px;
 }
 
 nav a{
-    color:white;
-    text-decoration:none;
-    font-weight:600;
-    transition:.3s;
+color:white;
+text-decoration:none;
+font-weight:600;
 }
-
-nav a:hover{
-    color:var(--red);
-}
-
-/* SECTIONS */
 
 section{
-    padding:100px 10%;
+padding:100px 10%;
 }
 
 .section-title{
-    text-align:center;
-    font-size:3rem;
-    margin-bottom:60px;
+text-align:center;
+font-size:3rem;
+margin-bottom:50px;
 }
 
-/* STATS */
+.glass{
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.1);
+border-radius:20px;
+padding:30px;
+}
 
 .stats{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
 }
 
 .stat{
-    background:var(--card);
-    backdrop-filter:blur(20px);
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:20px;
-    padding:40px;
-    text-align:center;
-    transition:.4s;
+text-align:center;
 }
 
-.stat:hover{
-    transform:translateY(-10px);
+.counter{
+font-size:3rem;
+font-weight:700;
+color:#0066ff;
 }
-
-.stat h2{
-    color:var(--blue);
-    font-size:3rem;
-}
-
-.stat p{
-    margin-top:10px;
-}
-
-/* CARDS */
 
 .cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:30px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
 }
 
 .card{
-    background:var(--card);
-    backdrop-filter:blur(15px);
-    border-radius:20px;
-    padding:30px;
-    border:1px solid rgba(255,255,255,.1);
-    transition:.4s;
+background:rgba(255,255,255,.05);
+padding:25px;
+border-radius:20px;
+transition:.3s;
 }
 
 .card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 0 25px rgba(0,102,255,.5);
+transform:translateY(-10px);
+box-shadow:0 0 30px rgba(0,102,255,.5);
 }
 
-.card h3{
-    color:var(--red);
-    margin-bottom:15px;
+#controller3d{
+height:500px;
+width:100%;
 }
-
-/* FINDINGS */
-
-.bar{
-    margin:25px 0;
-}
-
-.bar-title{
-    margin-bottom:10px;
-}
-
-.progress{
-    height:18px;
-    border-radius:20px;
-    overflow:hidden;
-    background:#111;
-}
-
-.fill{
-    height:100%;
-    background:linear-gradient(90deg,var(--red),var(--blue));
-}
-
-/* TIMELINE */
-
-.timeline{
-    border-left:4px solid var(--blue);
-    padding-left:40px;
-}
-
-.timeline-item{
-    margin-bottom:40px;
-}
-
-.timeline-item h3{
-    color:var(--red);
-}
-
-/* FOOTER */
 
 footer{
-    text-align:center;
-    padding:50px;
-    background:black;
+padding:40px;
+text-align:center;
+background:black;
 }
-
 </style>
 </head>
 <body>
 
-<section class="hero">
+<div id="particles-js"></div>
 
+<div class="hero">
 <h1>ONLINE GAMING</h1>
-
-<p>
-Exploring the benefits, risks and impact of online gaming in today's digital world.
-</p>
-
-<button onclick="document.getElementById('about').scrollIntoView()">
-Explore Study
-</button>
-
-</section>
+<p>Exploring the benefits, risks and impact of online gaming in today's digital world.</p>
+</div>
 
 <nav>
 <ul>
 <li><a href="#about">About</a></li>
-<li><a href="#stats">Statistics</a></li>
-<li><a href="#platforms">Platforms</a></li>
-<li><a href="#findings">Findings</a></li>
+<li><a href="#stats">Stats</a></li>
+<li><a href="#controller">3D Model</a></li>
 <li><a href="#risks">Risks</a></li>
-<li><a href="#timeline">Timeline</a></li>
 </ul>
 </nav>
 
 <section id="about">
-
 <h2 class="section-title">About Online Gaming</h2>
-
-<div class="card">
+<div class="glass">
 <p>
-Online gaming allows players to connect through the internet using computers,
-mobile devices, tablets and gaming consoles. Millions of people play online
-games daily, making it one of the world's most popular forms of entertainment.
+Online gaming allows players to connect globally through computers,
+phones, tablets and gaming consoles.
 </p>
 </div>
-
 </section>
 
 <section id="stats">
-
 <h2 class="section-title">Gaming Statistics</h2>
 
 <div class="stats">
 
-<div class="stat">
-<h2>3.4B</h2>
-<p>Global Gamers</p>
+<div class="glass stat">
+<h2 class="counter" data-target="3400">0</h2>
+<p>Million Gamers</p>
 </div>
 
-<div class="stat">
-<h2>2.8B</h2>
+<div class="glass stat">
+<h2 class="counter" data-target="2800">0</h2>
 <p>Mobile Gamers</p>
 </div>
 
-<div class="stat">
-<h2>$250B</h2>
-<p>Industry Value</p>
+<div class="glass stat">
+<h2 class="counter" data-target="250">0</h2>
+<p>Billion Dollar Industry</p>
 </div>
 
 </div>
-
 </section>
 
-<section id="platforms">
-
-<h2 class="section-title">Popular Platforms</h2>
-
-<div class="cards">
-
-<div class="card">
-<h3>Roblox</h3>
-<p>Creative multiplayer platform with millions of experiences.</p>
-</div>
-
-<div class="card">
-<h3>Minecraft</h3>
-<p>Sandbox game encouraging creativity and survival gameplay.</p>
-</div>
-
-<div class="card">
-<h3>Fortnite</h3>
-<p>Battle royale phenomenon connecting players worldwide.</p>
-</div>
-
-<div class="card">
-<h3>Steam</h3>
-<p>Largest PC gaming distribution platform.</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="findings">
-
-<h2 class="section-title">Research Findings</h2>
-
-<div class="bar">
-<div class="bar-title">Entertainment Value - 95%</div>
-<div class="progress"><div class="fill" style="width:95%"></div></div>
-</div>
-
-<div class="bar">
-<div class="bar-title">Social Interaction - 88%</div>
-<div class="progress"><div class="fill" style="width:88%"></div></div>
-</div>
-
-<div class="bar">
-<div class="bar-title">Problem Solving Skills - 82%</div>
-<div class="progress"><div class="fill" style="width:82%"></div></div>
-</div>
-
+<section id="controller">
+<h2 class="section-title">3D Gaming Controller</h2>
+<div id="controller3d"></div>
 </section>
 
 <section id="risks">
-
 <h2 class="section-title">Potential Risks</h2>
 
 <div class="cards">
 
 <div class="card">
 <h3>Identity Theft</h3>
-<p>Sharing personal information online can create security risks.</p>
+<p>Sharing personal information can be dangerous.</p>
 </div>
 
 <div class="card">
 <h3>Phishing</h3>
-<p>Fake links and scams may attempt to steal user information.</p>
+<p>Scammers may attempt to steal accounts.</p>
 </div>
 
 <div class="card">
 <h3>Cyberbullying</h3>
-<p>Negative interactions can affect player wellbeing.</p>
+<p>Negative player interactions can occur online.</p>
 </div>
 
 <div class="card">
 <h3>Addiction</h3>
-<p>Excessive gaming may impact daily responsibilities.</p>
+<p>Excessive gaming may impact daily life.</p>
 </div>
 
 </div>
-
-</section>
-
-<section id="timeline">
-
-<h2 class="section-title">Gaming Timeline</h2>
-
-<div class="timeline">
-
-<div class="timeline-item">
-<h3>2004</h3>
-<p>Roblox founded.</p>
-</div>
-
-<div class="timeline-item">
-<h3>2009</h3>
-<p>Minecraft officially released.</p>
-</div>
-
-<div class="timeline-item">
-<h3>2017</h3>
-<p>Fortnite launches globally.</p>
-</div>
-
-<div class="timeline-item">
-<h3>2025</h3>
-<p>Over 3.4 billion gamers worldwide.</p>
-</div>
-
-</div>
-
 </section>
 
 <footer>
-<h3>Online Gaming Research Project</h3>
-<p>Created for Educational Purposes</p>
+Online Gaming Research Project
 </footer>
+
+<script>
+tsParticles.load("particles-js",{
+particles:{
+number:{value:100},
+color:{value:["#ff003c","#0066ff"]},
+links:{enable:true,color:"#ffffff",opacity:0.15},
+move:{enable:true,speed:2},
+size:{value:3}
+},
+background:{color:"#050816"}
+});
+
+document.querySelectorAll(".counter").forEach(counter=>{
+const update=()=>{
+const target=+counter.dataset.target;
+const count=+counter.innerText;
+const inc=target/150;
+
+if(count<target){
+counter.innerText=Math.ceil(count+inc);
+setTimeout(update,10);
+}else{
+counter.innerText=target;
+}
+};
+update();
+});
+
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(
+75,
+document.getElementById("controller3d").clientWidth/500,
+0.1,
+1000
+);
+
+const renderer=new THREE.WebGLRenderer({
+alpha:true,
+antialias:true
+});
+
+renderer.setSize(
+document.getElementById("controller3d").clientWidth,
+500
+);
+
+document.getElementById("controller3d")
+.appendChild(renderer.domElement);
+
+const material=new THREE.MeshStandardMaterial({
+color:0x111111,
+metalness:0.8,
+roughness:0.2
+});
+
+const body=new THREE.Mesh(
+new THREE.BoxGeometry(4,1.2,1.8),
+material
+);
+
+scene.add(body);
+
+const leftGrip=new THREE.Mesh(
+new THREE.SphereGeometry(0.8,32,32),
+material
+);
+
+leftGrip.position.set(-2,-0.6,0);
+scene.add(leftGrip);
+
+const rightGrip=new THREE.Mesh(
+new THREE.SphereGeometry(0.8,32,32),
+material
+);
+
+rightGrip.position.set(2,-0.6,0);
+scene.add(rightGrip);
+
+const light=new THREE.PointLight(0xffffff,2);
+light.position.set(5,5,5);
+scene.add(light);
+
+scene.add(new THREE.AmbientLight(0xffffff,0.5));
+
+camera.position.z=7;
+
+function animate(){
+requestAnimationFrame(animate);
+body.rotation.y+=0.01;
+leftGrip.rotation.y+=0.01;
+rightGrip.rotation.y+=0.01;
+renderer.render(scene,camera);
+}
+animate();
+</script>
 
 </body>
 </html>
