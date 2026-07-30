@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Online Gaming</title>
+<title>Nebula Gaming Studios</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
 
 <style>
 
@@ -14,121 +16,272 @@
     padding:0;
     box-sizing:border-box;
     font-family:'Poppins',sans-serif;
+    scroll-behavior:smooth;
+}
+
+:root{
+    --red:#ff003c;
+    --blue:#0066ff;
+    --dark:#050816;
+    --card:rgba(255,255,255,0.05);
 }
 
 body{
+    background:#050816;
     color:white;
     overflow-x:hidden;
-
-    background:
-    radial-gradient(circle at top left,#ff003c55,transparent 30%),
-    radial-gradient(circle at top right,#0066ff55,transparent 30%),
-    radial-gradient(circle at bottom,#001133,transparent 50%),
-    #050816;
 }
-
-/* PARTICLES */
 
 #particles-js{
     position:fixed;
-    top:0;
-    left:0;
     width:100%;
     height:100%;
-    z-index:-1;
+    top:0;
+    left:0;
+    z-index:-3;
 }
-
-/* GLOW EFFECTS */
 
 .glow-red{
     position:fixed;
-    width:500px;
-    height:500px;
-    background:#ff003c;
-    filter:blur(180px);
-    opacity:0.18;
-    top:-150px;
-    left:-150px;
+    width:600px;
+    height:600px;
+    background:var(--red);
+    filter:blur(250px);
+    opacity:.15;
+    left:-200px;
+    top:-200px;
     z-index:-2;
 }
 
 .glow-blue{
     position:fixed;
-    width:500px;
-    height:500px;
-    background:#0066ff;
-    filter:blur(180px);
-    opacity:0.18;
-    bottom:-150px;
-    right:-150px;
+    width:600px;
+    height:600px;
+    background:var(--blue);
+    filter:blur(250px);
+    opacity:.15;
+    right:-200px;
+    bottom:-200px;
     z-index:-2;
+}
+
+/* NAV */
+
+nav{
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index:999;
+    backdrop-filter:blur(20px);
+    background:rgba(0,0,0,.4);
+}
+
+.nav-container{
+    max-width:1400px;
+    margin:auto;
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:1.8rem;
+    font-weight:800;
+}
+
+.logo span{
+    color:var(--red);
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:40px;
+}
+
+nav a{
+    text-decoration:none;
+    color:white;
+    font-weight:600;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:var(--red);
 }
 
 /* HERO */
 
 .hero{
-    height:100vh;
+    min-height:100vh;
     display:flex;
-    flex-direction:column;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     text-align:center;
-    padding:20px;
+    padding:120px 20px;
+}
+
+.hero-content{
+    max-width:1000px;
 }
 
 .hero h1{
     font-size:6rem;
+    line-height:1;
     font-weight:900;
-    background:linear-gradient(90deg,#ff003c,#0066ff);
+    margin-bottom:25px;
+}
+
+.gradient{
+    background:linear-gradient(90deg,var(--red),var(--blue));
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
-    text-shadow:0 0 30px rgba(255,255,255,.1);
 }
 
 .hero p{
-    max-width:800px;
-    margin-top:20px;
     font-size:1.3rem;
-    color:#ddd;
+    color:#d0d0d0;
+    margin-bottom:40px;
 }
 
-.hero button{
-    margin-top:35px;
-    padding:15px 35px;
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:16px 40px;
     border:none;
     border-radius:50px;
-    background:linear-gradient(90deg,#ff003c,#0066ff);
-    color:white;
-    font-size:18px;
-    font-weight:600;
     cursor:pointer;
+    font-size:1rem;
+    font-weight:700;
     transition:.3s;
 }
 
-.hero button:hover{
-    transform:scale(1.08);
-    box-shadow:0 0 25px rgba(0,102,255,.5);
+.primary{
+    background:linear-gradient(90deg,var(--red),var(--blue));
+    color:white;
 }
 
-/* SAMPLE CONTENT */
+.secondary{
+    background:transparent;
+    border:2px solid white;
+    color:white;
+}
 
-.section{
-    max-width:1000px;
-    margin:auto;
-    padding:80px 20px;
+.btn:hover{
+    transform:translateY(-5px);
+}
+
+/* SECTION */
+
+section{
+    padding:100px 10%;
+}
+
+.section-title{
+    text-align:center;
+    font-size:3rem;
+    margin-bottom:60px;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.stat-card{
+    background:var(--card);
+    backdrop-filter:blur(20px);
+    border-radius:20px;
+    padding:40px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.counter{
+    font-size:3rem;
+    font-weight:800;
+    color:var(--blue);
+}
+
+/* CARDS */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
 }
 
 .card{
-    background:rgba(255,255,255,.05);
-    backdrop-filter:blur(15px);
-    border:1px solid rgba(255,255,255,.1);
+    background:var(--card);
+    backdrop-filter:blur(20px);
     border-radius:20px;
     padding:30px;
+    border:1px solid rgba(255,255,255,.08);
+    transition:.4s;
 }
 
-.card h2{
-    color:#0066ff;
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 0 30px rgba(0,102,255,.3);
+}
+
+.card h3{
     margin-bottom:15px;
+    color:var(--red);
+}
+
+/* FEATURED GAME */
+
+.featured{
+    background:rgba(255,255,255,.03);
+    border-radius:30px;
+    padding:60px;
+    text-align:center;
+}
+
+.featured h2{
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+.featured p{
+    color:#cfcfcf;
+    max-width:700px;
+    margin:auto;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:60px;
+    background:black;
+    margin-top:100px;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+    font-size:3.5rem;
+}
+
+nav ul{
+    gap:15px;
+}
+
+.section-title{
+    font-size:2rem;
+}
+
 }
 
 </style>
@@ -136,70 +289,186 @@ body{
 <body>
 
 <div id="particles-js"></div>
-
 <div class="glow-red"></div>
 <div class="glow-blue"></div>
 
+<nav>
+<div class="nav-container">
+<div class="logo">Nebula<span>Gaming</span></div>
+
+<ul>
+<li><a href="#stats">Stats</a></li>
+<li><a href="#games">Games</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#news">News</a></li>
+</ul>
+</div>
+</nav>
+
 <section class="hero">
 
-    <h1>ONLINE GAMING</h1>
+<div class="hero-content">
 
-    <p>
-        Exploring the benefits, risks and impact of online gaming in today's digital world.
-    </p>
+<h1>
+Welcome To<br>
+<span class="gradient">Nebula Gaming</span>
+</h1>
 
-    <button>Explore</button>
+<p>
+Creating immersive gaming experiences for players around the world.
+Join millions of gamers and discover the next generation of online entertainment.
+</p>
+
+<div class="buttons">
+<button class="btn primary">PLAY NOW</button>
+<button class="btn secondary">LEARN MORE</button>
+</div>
+
+</div>
 
 </section>
 
-<section class="section">
-    <div class="card">
-        <h2>About Online Gaming</h2>
-        <p>
-            Online gaming allows players around the world to connect,
-            compete and cooperate using computers, mobile devices and consoles.
-        </p>
-    </div>
+<section id="stats">
+
+<h2 class="section-title">Company Statistics</h2>
+
+<div class="stats">
+
+<div class="stat-card">
+<div class="counter" data-target="12">0</div>
+<h3>Million Players</h3>
+</div>
+
+<div class="stat-card">
+<div class="counter" data-target="250">0</div>
+<h3>Games Created</h3>
+</div>
+
+<div class="stat-card">
+<div class="counter" data-target="35">0</div>
+<h3>Countries Reached</h3>
+</div>
+
+</div>
+
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+<section id="games">
+
+<h2 class="section-title">Featured Games</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Battle Arena</h3>
+<p>Fast-paced multiplayer action with competitive gameplay.</p>
+</div>
+
+<div class="card">
+<h3>Cyber Racers</h3>
+<p>Race through futuristic cities and unlock exclusive vehicles.</p>
+</div>
+
+<div class="card">
+<h3>Space Conquest</h3>
+<p>Explore galaxies and build your empire among the stars.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="features">
+
+<h2 class="section-title">Why Choose Nebula?</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Fast Servers</h3>
+<p>Low latency and reliable gameplay worldwide.</p>
+</div>
+
+<div class="card">
+<h3>Active Development</h3>
+<p>Regular updates and community-requested features.</p>
+</div>
+
+<div class="card">
+<h3>Global Community</h3>
+<p>Millions of players connected every day.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="news">
+
+<div class="featured">
+
+<h2 class="gradient">Latest News</h2>
+
+<p>
+Version 4.0 is launching soon with new maps, vehicles,
+events and community rewards. Stay tuned for updates.
+</p>
+
+</div>
+
+</section>
+
+<footer>
+<h2>Nebula Gaming Studios</h2>
+<p>Building the Future of Gaming</p>
+</footer>
 
 <script>
-tsParticles.load("particles-js", {
-    particles: {
-        number: {
-            value: 120
-        },
 
-        color: {
-            value: ["#ff003c", "#0066ff"]
-        },
-
-        links: {
-            enable: true,
-            distance: 150,
-            color: "#ffffff",
-            opacity: 0.15
-        },
-
-        move: {
-            enable: true,
-            speed: 2
-        },
-
-        size: {
-            value: 3
-        },
-
-        opacity: {
-            value: 0.6
-        }
-    },
-
-    background: {
-        color: "transparent"
-    }
+tsParticles.load("particles-js",{
+particles:{
+number:{value:120},
+color:{value:["#ff003c","#0066ff"]},
+links:{
+enable:true,
+distance:150,
+opacity:.15
+},
+move:{
+enable:true,
+speed:2
+},
+size:{
+value:3
+}
+}
 });
+
+document.querySelectorAll('.counter').forEach(counter=>{
+
+const updateCounter=()=>{
+
+const target=+counter.getAttribute('data-target');
+const count=+counter.innerText;
+const increment=target/100;
+
+if(count<target){
+
+counter.innerText=Math.ceil(count+increment);
+setTimeout(updateCounter,20);
+
+}else{
+
+counter.innerText=target + "+";
+
+}
+
+};
+
+updateCounter();
+
+});
+
 </script>
 
 </body>
